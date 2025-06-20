@@ -78,10 +78,17 @@ async function carregarTabela() {
   try {
     const response = await fetch(sheetUrl);
     const text = await response.text();
-    // Extrai JSON entre parênteses da resposta JSONP da Google Sheets
-    const jsonStrMatch = text.match(/google\.visualization\.Query\.setResponse\((.*)\);/);
-    if (!jsonStrMatch) throw new Error('Formato de resposta inesperado da planilha.');
-    const json = JSON.parse(jsonStrMatch[1]);
+
+    // Log inicial para debug
+    console.log("Resposta inicial (100 chars):", text.substring(0, 100));
+
+    // Extrair JSON entre parênteses
+    const startIndex = text.indexOf('(');
+    const endIndex = text.lastIndexOf(')');
+    if (startIndex === -1 || endIndex === -1) throw new Error('Formato inesperado na resposta.');
+
+    const jsonStr = text.substring(startIndex + 1, endIndex);
+    const json = JSON.parse(jsonStr);
 
     const dados = json.table.rows;
     const tbody = document.querySelector('#tabelaPecas tbody');
