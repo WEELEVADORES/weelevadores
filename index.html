@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Painel de Tarefas - Google Sheets + GitHub</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-  }
-  table {
-    margin: 20px auto;
-    border-collapse: collapse;
-    width: 80%;
-  }
-  th, td {
-    border: 1px solid #333;
-    padding: 15px;
-    font-size: 24px;
-  }
-  th {
-    background-color: #4CAF50;
-    color: white;
-  }
-  td {
-    background-color: white;
-  }
-  input {
-    padding: 10px;
-    font-size: 18px;
-    margin-bottom: 20px;
-    width: 50%;
-  }
-  #erro {
-    color: red;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel de Tarefas - Google Sheets + GitHub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: white;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            width: 50%;
+        }
+
+        #erro {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-  <img src="logo.png" alt="logo" width="300" />
-  <h1>Peças para serem substituídas</h1>
+    <img src="logo.png" alt="logo" width="300" />
+    <h1>Peças para serem substituídas</h1>
 
-  <input
-    type="text"
-    id="filtroTabela1"
-    onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')"
-    placeholder="Pesquisar na tabela..."
-  />
+    <input type="text" id="filtroTabela1" onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')"
+        placeholder="Pesquisar na tabela..." />
 
-  <table id="tabelaPecas">
-    <thead>
-      <tr>
-        <th>Condomínio</th>
-        <th>Peças</th>
-        <th>Elevador</th>
-        <th>Quantidade</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Conteúdo será carregado via JS -->
-    </tbody>
-  </table>
+    <table id="tabelaPecas">
+        <thead>
+            <tr>
+                <th>Condomínio</th>
+                <th>Peças</th>
+                <th>Elevador</th>
+                <th>Quantidade</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dados serão carregados aqui -->
+        </tbody>
+    </table>
 
-  <div id="erro"></div>
+    <div id="erro"></div>
 
-<script>
-const sheetUrl =
-  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQappPGm7a3xdWhskHJP9Un1V5DW-VzPWjRb6suM9Ec8IIBikYMoFocGzYZ1H-xhu8EDsYmQLVISAbb/gviz/tq?tqx=out:json&gid=1106045084';
-
-async function carregarTabela() {
-  try {
-    const response = await fetch(sheetUrl);
+    <script>
+        const sheetUrl = 'https://docs.google.com/spreadsh
