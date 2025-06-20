@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="60"> <!-- Atualiza a cada 60 segundos -->
+    <meta http-equiv="refresh" content="60">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Tarefas</title>
     <style>
@@ -50,8 +50,7 @@
     <img src="logo.png" alt="logo" width="300">
     <h1>Peças para serem substituídas</h1>
 
-    <!-- Filtro -->
-    <input type="text" id="filtroTabela" onkeyup="filtrarTabela()" placeholder="Pesquisar na tabela...">
+    <input type="text" id="filtroTabela1" onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')" placeholder="Pesquisar na tabela...">
 
     <table id="tabelaPecas">
         <thead>
@@ -63,23 +62,53 @@
                 <th>Status</th>
             </tr>
         </thead>
-        <tbody id="corpoTabela">
-            <!-- Dados serão carregados aqui -->
-        </tbody>
+        <tbody id="corpoTabelaPecas"></tbody>
+    </table>
+
+    <h1>Serviços para serem executados</h1>
+
+    <input type="text" id="filtroTabela2" onkeyup="filtrarTabela('filtroTabela2', 'tabelaServicos')" placeholder="Pesquisar na tabela...">
+
+    <table id="tabelaServicos">
+        <thead>
+            <tr>
+                <th>Condomínio</th>
+                <th>Elevador</th>
+                <th>Descrição</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="corpoTabelaServicos"></tbody>
+    </table>
+
+    <h1>Informações para orçamentos</h1>
+
+    <input type="text" id="filtroTabela3" onkeyup="filtrarTabela('filtroTabela3', 'tabelaOrcamentos')" placeholder="Pesquisar na tabela...">
+
+    <table id="tabelaOrcamentos">
+        <thead>
+            <tr>
+                <th>Condomínio</th>
+                <th>Elevador</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody id="corpoTabelaOrcamentos"></tbody>
     </table>
 
     <script>
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/1guQgIfDkPImRq05OBmtm0EciJWzWzX22A9p-ELXCqCE/gviz/tq?tqx=out:json&gid=1106045084';
+        const sheets = {
+            pecas: 'https://docs.google.com/spreadsheets/d/1guQgIfDkPImRq05OBmtm0EciJWzWzX22A9p-ELXCqCE/gviz/tq?tqx=out:json&gid=902438858',
+            servicos: 'https://docs.google.com/spreadsheets/d/1guQgIfDkPImRq05OBmtm0EciJWzWzX22A9p-ELXCqCE/gviz/tq?tqx=out:json&gid=2140719791',
+            orcamentos: 'https://docs.google.com/spreadsheets/d/1guQgIfDkPImRq05OBmtm0EciJWzWzX22A9p-ELXCqCE/gviz/tq?tqx=out:json&gid=1438354293'
+        };
 
-        async function carregarTabela() {
+        async function carregarTabela(url, corpoTabelaId) {
             try {
-                const response = await fetch(sheetUrl);
+                const response = await fetch(url);
                 const text = await response.text();
-
-                // Corrigir o formato da resposta
                 const json = JSON.parse(text.substring(47).slice(0, -2));
-
-                const tabela = document.getElementById('corpoTabela');
+                const tabela = document.getElementById(corpoTabelaId);
                 tabela.innerHTML = '';
 
                 const rows = json.table.rows;
@@ -98,15 +127,15 @@
             }
         }
 
-        function filtrarTabela() {
+        function filtrarTabela(inputId, tabelaId) {
             var input, filtro, tabela, tr, td, i, j, txtValue, encontrado;
-            input = document.getElementById('filtroTabela');
+            input = document.getElementById(inputId);
             filtro = input.value.toUpperCase();
-            tabela = document.getElementById('tabelaPecas');
+            tabela = document.getElementById(tabelaId);
             tr = tabela.getElementsByTagName("tr");
 
-            for (i = 1; i < tr.length; i++) { // Começa de 1 para ignorar o cabeçalho
-                tr[i].style.display = "none"; // Esconde a linha inicialmente
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
                 td = tr[i].getElementsByTagName("td");
                 encontrado = false;
 
@@ -117,3 +146,20 @@
                             encontrado = true;
                             break;
                         }
+                    }
+                }
+
+                if (encontrado) {
+                    tr[i].style.display = "";
+                }
+            }
+        }
+
+        carregarTabela(sheets.pecas, 'corpoTabelaPecas');
+        carregarTabela(sheets.servicos, 'corpoTabelaServicos');
+        carregarTabela(sheets.orcamentos, 'corpoTabelaOrcamentos');
+    </script>
+
+</body>
+
+</html>
