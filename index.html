@@ -1,590 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="30"> <!-- Atualiza a cada 30 segundos -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Tarefas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        table {
-            margin: 20px auto;
-            border-collapse: collapse;
-            width: 80%;
-        }
-        th, td {
-            border: 1px solid #333;
-            padding: 15px;
-            font-size: 24px;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        td {
-            background-color: white;
-        }
-        input {
-            padding: 10px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            width: 50%;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Painel de Tarefas - GitHub + Google Sheets</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+    }
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+    }
+    th, td {
+        border: 1px solid #333;
+        padding: 15px;
+        font-size: 24px;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    td {
+        background-color: white;
+    }
+    input {
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 20px;
+        width: 50%;
+    }
+    #erro {
+        color: red;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
 </head>
-    <img src="logo.png" alt="logo" width="300">
 <body>
-    <h1>Peças para serem substituidas</h1>
+    <img src="logo.png" alt="logo" width="300" />
+    <h1>Peças para serem substituídas</h1>
 
-    <!-- Filtro 1 -->
-    <input type="text" id="filtroTabela1" onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')" placeholder="Pesquisar na tabela...">
+    <input
+        type="text"
+        id="filtroTabela1"
+        onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')"
+        placeholder="Pesquisar na tabela..."
+    />
 
     <table id="tabelaPecas">
-        <tr>
-            <th>Condomínio</th>
-            <th>Peças</th>
-            <th>Elevador</th>
-            <th>Quantidade</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <td>Sales</td>
-            <td>Led para botão</td>            
-            <td>Unico</td>
-            <td>01</td>
-            <td>Separado</td>  
-        </tr>
-        <tr>
-            <td>Matos de Carvalho</td>
-            <td>Corrediças miconic</td>
-            <td>Social</td>
-            <td>04</td>
-            <td>Separado</td>  
-        </tr>
-        <tr>
-            <td>Matos de Carvalho</td>
-            <td>Corrediça gravatinha</td>
-            <td>Social</td>
-            <td>04</td>
-            <td>Separado</td>  
-        </tr>
-        <tr>
-            <td>Matos de Carvalho</td>
-            <td>Painel de chamada MX</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Separado</td>  
-        </tr>
-        <tr>
-            <td>Atlântico Sul</td>
-            <td>Óleo lubrificante N°33</td>
-            <td>Social e Serviço</td>
-            <td>21</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Atlântico Sul</td>
-            <td>Corrediças Tke</td>
-            <td>Social e Serviço</td>
-            <td>08</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Atlântico Sul</td>
-            <td>Roldana de trinco</td>
-            <td>Social </td>
-            <td>02</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Atlântico Sul</td>
-            <td>Acrilico para termostato</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Atlântico Sul</td>
-            <td>Mola de porta</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Atlântico Sul</td>
-            <td>Contato AZ061</td>
-            <td>Social 01</td>
-            <td>01</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Santorini</td>
-            <td>Fecho AK1</td>
-            <td>Unico</td>
-            <td>01</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Cidade</td>
-            <td>Roldana Selcom</td>
-            <td>Social 03</td>
-            <td>04</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Cidade</td>
-            <td>Subteto </td>
-            <td>Elevador 05 e 06</td>
-            <td>02</td>
-            <td>Aguardando fabricação</td>
-        </tr>
-        <tr>
-            <td>Cidade</td>
-            <td>Polia tensora do operador de porta </td>
-            <td>Elevador 01</td>
-            <td>01</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Cidade</td>
-            <td>Cabos de tração e polia </td>
-            <td>Elevador 02</td>
-            <td>01</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Cidade</td>
-            <td>Cabo de tração de porta de cabine </td>
-            <td>Elevador 02</td>
-            <td>01</td>
-            <td>Aguardando separação</td>
-        <tr>
-            <td>Luzerne</td>
-            <td>Contato carvão</td>
-            <td>Social</td>
-            <td>08</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Duarte</td>
-            <td>Garfo de porta</td>
-            <td>Social 02</td>
-            <td>02</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Riquet</td>
-            <td>Botão Classe A</td>
-            <td>Serviço</td>
-            <td>02</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Riquet</td>
-            <td>Lente botão Classe A</td>
-            <td>Social</td>
-            <td>04</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Rolim Veras</td>
-            <td>Óleo lubrificante N° 45</td>
-            <td>Bloco A e B</td>
-            <td>07</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Reserva Imperial</td>
-            <td>Cabo de Manobra</td>
-            <td>Serviço Bloco B</td>
-            <td>108</td>
-            <td>Separado</td>
-        </tr>
-        <tr>
-            <td>Viscaya Gardens</td>
-            <td>Cabo de tração de porta de cabine</td>
-            <td>Social e Serviço</td>
-            <td>02</td>
-            <td>Aguardando separação</td>
-        </tr>
-        <tr>
-            <td>Viscaya Gardens</td>
-            <td>Cabo de tração de porta de Pavimento</td>
-            <td>Social e Serviço</td>
-            <td>02</td>
-            <td>Aguardando separação</td>
-        </tr>
-        <tr>
-            <td>Itagua</td>
-            <td>Indicadores dos andares P e SF</td>
-            <td>Social</td>
-            <td>02</td>
-            <td>Separado</td>
+        <thead>
             <tr>
-            <td>Amsterdã</td>
-            <td>Óleo lubrificante N°33</td>
-            <td>Único</td>
-            <td>03</td>
-            <td>Separado</td>
-                 <tr>
-                 <td>Nautilus</td>
-            <td>Óleo lubrificante N°33</td>
-            <td>Serviço</td>
-            <td>04</td>
-            <td>Separado</td>
-                      <tr>
-                   <td>Nautilus</td>
-            <td>Difusor de led</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Separado</td>
-                           <tr>
-                <td>Nautilus</td>
-            <td>Módulo Spm</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Aguardando separação</td>
-                                <tr>
-                  <td>Master Navegantes</td>
-            <td>Óleo lubrificante N°33</td>
-            <td>Social e serviço</td>
-            <td>08</td>
-            <td>Separado</td>
-                                     <tr>
-                 <td>Monte libano</td>
-            <td>Óleo lubrificante N°33</td>
-            <td>Social e serviço</td>
-            <td>06</td>
-            <td>Separado</td>
-                                          <tr>
-                  <td>Betel</td>
-            <td>Difuso de Led</td>
-            <td>Social</td>
-            <td>01</td>
-            <td>Separado</td>
-                                               <tr>
-                    <td>Betel</td>
-            <td>Kit de emergência</td>
-            <td>Social</td>
-            <td>01</td>
-            <td>Separado</td>
-                                                    <tr>
-            <td>Anesia Martins</td>
-            <td>Escada de Marinheiro</td>
-            <td>Social e serviço</td>
-            <td>02</td>
-            <td>Aguardando reposição</td>
-                                                    <tr>
-                                                                    <td>Ilhas Gregas</td>
-            <td>Rolamento polia do contra-peso</td>
-            <td>Serviço Naxus</td>
-            <td>02</td>
-            <td>Aguardando reposição</td>
-                                                               <tr>
-                                                                    <td>Reserva Imperial</td>
-            <td>Botoeira Excel</td>
-            <td>Serviço bloco B</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                                     <tr>
-                                                                    <td>Reserva Imperial</td>
-            <td>Botoeira Excel</td>
-            <td>Social bloco A</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                    <tr>
-                                                                    <td>Cidade</td>
-            <td>Roldana selcom</td>
-            <td>Social 05</td>
-            <td>04</td>
-            <td>Aguardando reposição</td>
-                                        <tr>
-                                                                    <td>Concord II</td>
-            <td>Amortecedor dorma</td>
-            <td>Social</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                            <tr>
-                                                                    <td>Master navegantes</td>
-            <td>Corrediças de guia</td>
-            <td>Serviço</td>
-            <td>04</td>
-            <td>Aguardando reposição</td>
-                                                    <tr>
-                                                                    <td>Green Paradise</td>
-            <td>Cabos de tração</td>
-            <td>Serviço bloco B</td>
-            <td>280</td>
-            <td>Aguardando reposição</td>
-                                                           <tr>
-                                                                    <td>Green Paradise</td>
-            <td>Aro de tração</td>
-            <td>Serviço bloco B</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                                  <tr>
-                                                                    <td>Green Paradise</td>
-            <td>Tirante 13mm</td>
-            <td>Serviço bloco B</td>
-            <td>08</td>
-            <td>Aguardando reposição</td>
-                                                    <tr>
-                                                                                                   <td>Gran place</td>
-            <td>Botão new soft press</td>
-            <td>Social 01</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                          <tr>
-               <td>Notre vie</td>
-            <td>Corrediças de guia</td>
-            <td>Social</td>
-            <td>06</td>
-            <td>Aguardando reposição</td>
-                                                 <tr>
-                                                      <td>Mont serrat</td>
-            <td>Ipd lcd SCCE04448</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                 <tr>
-                                  <td>Mont serrat</td>
-            <td>Ventilado com suporte de fixação</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                            
-                                                                      <tr>
-                                  <td>Mont serrat</td>
-            <td>Fita de led Branco Frio</td>
-            <td>Social</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                                <tr>
-                                  <td>Mont serrat</td>
-            <td>Difusor de led</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                                  <tr>
-                                  <td>Viscaya Gardens</td>
-            <td>Acoplamento do encoder</td>
-            <td>Social</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                            <td>Gran Place</td>
-            <td>Microruptor da polia tensora</td>
-            <td>Social 01 e serviço</td>
-            <td>02</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                           <td>Santorini</td>
-            <td>Indicador de posição IPD-M30</td>
-            <td>Único</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                      <td>San Carlo</td>
-            <td>Botão modelinho Otis</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                      <td>Acapulco</td>
-            <td>Difusor de led 3w</td>
-            <td>Social e serviço</td>
-            <td>02</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                      <td>Biscayne Place</td>
-            <td>Cabo de tração porta de pavimento</td>
-            <td>Social 01</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                       <td>Biscayne Place</td>
-            <td>Cabo de tração porta de cabine</td>
-            <td>Social 02</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                         <td>Biscayne Place</td>
-            <td>Microruptor da polia tensora</td>
-            <td>Serviço</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                      <td>Riquet</td>
-            <td>Cabos de tração</td>
-            <td>social</td>
-            <td>416</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                                                       <td>Riquet</td>
-            <td>Tirantes 3/8</td>
-            <td>social</td>
-            <td>08</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                                                       <td>Riquet</td>
-            <td>Aro de tração</td>
-            <td>social</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                                                       <td>Vale dos Ipês</td>
-            <td>Cabos de tração</td>
-            <td>social</td>
-            <td>416</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                                                                                      <td>Vale dos Ipês</td>
-            <td>Corrediça selcom </td>
-            <td>social C: 08° andar</td>
-            <td>04</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                                                                                                                   <td>Vale dos Ipês</td>
-            <td>Rolinho selcom</td>
-            <td>social B: 07° andar</td>
-            <td>02</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                                                                                                                                                     <td>Vale dos Ipês</td>
-            <td>Botão Elx-500</td>
-            <td>social A: 02° andar</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                                                                                                                                                                                                                                         <td>Vale dos Ipês</td>
-            <td>Cabo de tração de porta de pavimento</td>
-            <td>social A: 05° andar</td>
-            <td>01</td>
-            <td>Aguardando reposição</td>
-                                                     <tr>
-                               <td>Orion</td>
-            <td>Corrediças Gravatinha</td>
-            <td>Serviço</td>
-            <td>04</td>
-            <td>Separado</td>
-                                                     <tr>
-                                                         
-                                              
-                                              
-                                              
-                                              
-                
-        </tr>
+                <th>Condomínio</th>
+                <th>Peças</th>
+                <th>Elevador</th>
+                <th>Quantidade</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Linhas serão geradas via JS -->
+        </tbody>
     </table>
 
-</footer>
-
-<h1>Serviços para serem executados</h1>
-
-<!-- Filtro 2 -->
-<input type="text" id="filtroTabela2" onkeyup="filtrarTabela('filtroTabela2', 'tabelaServicos')" placeholder="Pesquisar na tabela...">
-
-<table id="tabelaServicos">
-    <tr>
-        <th>Condominio</th>
-        <th>Elevador</th>
-        <th>Descrição</th>
-        <th>Status</th>
-    </tr>
-    <tr>
-        <td>Ilhas Gregas</td>
-        <td>Social e serviço Andrus</td>
-        <td>Encurtamento cabos de tração</td>
-        <td>Aguardando agendamento</td>
-    </tr>
-    <tr>
-        <td>Antilhas</td>
-        <td>Bloco B</td>
-        <td>Amortecedor 03 andar</td>
-        <td>Aguardando reposição</td>
-    </tr>
-      <td>Vale dos Ipês</td>
-        <td>Bloco B</td>
-        <td>Encurtar cabo do limitador de velocidade</td>
-        <td>Aguardando agendamento</td>
-      </tr>
-      <td>Vale dos Ipês</td>
-        <td>Bloco A</td>
-        <td>Encurtar cabo do limitador de velocidade</td>
-        <td>Aguardando agendamento</td>
-    </tr>
-     <td>Vale dos Ipês</td>
-        <td>Bloco A</td>
-        <td>Verificar interfone</td>
-        <td>Aguardando agendamento</td>
-    </tr>
-     <td>Matos de Carvalho</td>
-        <td>Serviço</td>
-        <td>Solda no suporte do contato da porta de cabine</td>
-        <td>Aguardando agendamento</td>
-    </tr>
-</table>
-
-</footer>
-
-<h1>Informações para orçamentos</h1>
-
-<!-- Filtro 3 -->
-<input type="text" id="filtroTabela3" onkeyup="filtrarTabela('filtroTabela3', 'tabelaOrcamentos')" placeholder="Pesquisar na tabela...">
-
-<table id="tabelaOrcamentos">
-    <tr>
-        <th>Condominio</th>
-        <th>Elevador</th>
-        <th>Descrição</th>
-    </tr>
-    <tr>
-        <td>Marechal Rondon</td>
-        <td>Único</td>
-        <td>Medidas cabos de tração e polia</td>
-    </tr>
-    <tr>
-        <td>Gran Place</td>
-        <td>Social 01</td>
-        <td>Medidas cabos de tração e polia</td>
-    </tr>
-</table>
+    <div id="erro"></div>
 
 <script>
-    function filtrarTabela(inputId, tabelaId) {
-        var input, filtro, tabela, tr, td, i, j, txtValue, encontrado;
-        input = document.getElementById(inputId);
-        filtro = input.value.toUpperCase();
-        tabela = document.getElementById(tabelaId);
-        tr = tabela.getElementsByTagName("tr");
+const sheetUrl =
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQappPGm7a3xdWhskHJP9Un1V5DW-VzPWjRb6suM9Ec8IIBikYMoFocGzYZ1H-xhu8EDsYmQLVISAbb/gviz/tq?tqx=out:json&sheet=Sheet1';
 
-        for (i = 1; i < tr.length; i++) { // Começa de 1 para ignorar o cabeçalho
-            tr[i].style.display = "none"; // Esconde a linha inicialmente
-            td = tr[i].getElementsByTagName("td");
-            encontrado = false;
+async function carregarTabela() {
+  try {
+    const response = await fetch(sheetUrl);
+    const text = await response.text();
+    // Extrai JSON entre parênteses da resposta JSONP da Google Sheets
+    const jsonStrMatch = text.match(/google\.visualization\.Query\.setResponse\((.*)\);/);
+    if (!jsonStrMatch) throw new Error('Formato de resposta inesperado da planilha.');
+    const json = JSON.parse(jsonStrMatch[1]);
 
-            for (j = 0; j < td.length; j++) {
-                if (td[j]) {
-                    txtValue = td[j].textContent || td[j].innerText;
-                    if (txtValue.toUpperCase().indexOf(filtro) > -1) {
-                        encontrado = true;
-                        break;
-                    }
-                }
-            }
+    const dados = json.table.rows;
+    const tbody = document.querySelector('#tabelaPecas tbody');
+    tbody.innerHTML = '';
 
-            if (encontrado) {
-                tr[i].style.display = "";
-            }
-        }
+    dados.forEach((linha) => {
+      const cols = linha.c.map((c) => (c ? c.v : ''));
+      const tr = document.createElement('tr');
+      cols.forEach((col) => {
+        const td = document.createElement('td');
+        td.textContent = col;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  } catch (e) {
+    document.getElementById('erro').textContent = 'Erro ao carregar dados: ' + e.message;
+    console.error(e);
+  }
+}
+
+function filtrarTabela(inputId, tabelaId) {
+  const input = document.getElementById(inputId);
+  const filtro = input.value.toUpperCase();
+  const tabela = document.getElementById(tabelaId);
+  const trs = tabela.tBodies[0].getElementsByTagName('tr');
+
+  for (let i = 0; i < trs.length; i++) {
+    const tds = trs[i].getElementsByTagName('td');
+    let encontrado = false;
+
+    for (let j = 0; j < tds.length; j++) {
+      const txtValue = tds[j].textContent || tds[j].innerText;
+      if (txtValue.toUpperCase().indexOf(filtro) > -1) {
+        encontrado = true;
+        break;
+      }
     }
-</script>
+    trs[i].style.display = encontrado ? '' : 'none';
+  }
+}
 
+window.onload = carregarTabela;
+</script>
 </body>
 </html>
