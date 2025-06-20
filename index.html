@@ -1,142 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Painel de Tarefas - Google Sheets + GitHub</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-
-        table {
-            margin: 20px auto;
-            border-collapse: collapse;
-            width: 80%;
-        }
-
-        th,
-        td {
-            border: 1px solid #333;
-            padding: 15px;
-            font-size: 24px;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            background-color: white;
-        }
-
-        input {
-            padding: 10px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            width: 50%;
-        }
-
-        #erro {
-            color: red;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel de Tarefas - Google Sheets + GitHub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 15px;
+      font-size: 24px;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    td {
+      background-color: white;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      width: 50%;
+    }
+    #erro {
+      color: red;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-
 <body>
-    <img src="logo.png" alt="logo" width="300" />
-    <h1>Peças para serem substituídas</h1>
+  <img src="logo.png" alt="logo" width="300" />
+  <h1>Peças para serem substituídas</h1>
 
-    <input type="text" id="filtroTabela1" onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')"
-        placeholder="Pesquisar na tabela..." />
+  <input
+    type="text"
+    id="filtroTabela1"
+    onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')"
+    placeholder="Pesquisar na tabela..."
+  />
 
-    <table id="tabelaPecas">
-        <thead>
-            <tr>
-                <th>Condomínio</th>
-                <th>Peças</th>
-                <th>Elevador</th>
-                <th>Quantidade</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Dados serão carregados aqui -->
-        </tbody>
-    </table>
+  <table id="tabelaPecas">
+    <thead>
+      <tr>
+        <th>Condomínio</th>
+        <th>Peças</th>
+        <th>Elevador</th>
+        <th>Quantidade</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dados serão carregados aqui -->
+    </tbody>
+  </table>
 
-    <div id="erro"></div>
+  <div id="erro"></div>
 
-    <script>
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQappPGm7a3xdWhskHJP9Un1V5DW-VzPWjRb6suM9Ec8IIBikYMoFocGzYZ1H-xhu8EDsYmQLVISAbb/gviz/tq?tqx=out:json&gid=1106045084';
+  <script>
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQappPGm7a3xdWhskHJP9Un1V5DW-VzPWjRb6suM9Ec8IIBikYMoFocGzYZ1H-xhu8EDsYmQLVISAbb/gviz/tq?tqx=out:json&gid=1106045084';
 
-        async function carregarTabela() {
-            try {
-                const response = await fetch(sheetUrl);
-                const text = await response.text();
+    async function carregarTabela() {
+      try {
+        const response = await fetch(sheetUrl);
+        const text = await response.text();
 
-                console.log("Resposta inicial (100 chars):", text.substring(0, 100));
+        console.log("Resposta inicial (100 chars):", text.substring(0, 100));
 
-                const startIndex = text.indexOf('(');
-                const endIndex = text.lastIndexOf(')');
-                if (startIndex === -1 || endIndex === -1) throw new Error('Formato inesperado na resposta.');
+        const startIndex = text.indexOf('(');
+        const endIndex = text.lastIndexOf(')');
+        if (startIndex === -1 || endIndex === -1) throw new Error('Formato inesperado na resposta.');
 
-                const jsonStr = text.substring(startIndex + 1, endIndex);
-                const json = JSON.parse(jsonStr);
+        const jsonStr = text.substring(startIndex + 1, endIndex);
+        const json = JSON.parse(jsonStr);
 
-                const dados = json.table.rows;
-                const tbody = document.querySelector('#tabelaPecas tbody');
-                tbody.innerHTML = '';
+        const dados = json.table.rows;
+        const tbody = document.querySelector('#tabelaPecas tbody');
+        tbody.innerHTML = '';
 
-                dados.forEach((linha) => {
-                    const cols = linha.c.map((c) => (c ? c.v : ''));
-                    const tr = document.createElement('tr');
-                    cols.forEach((col) => {
-                        const td = document.createElement('td');
-                        td.textContent = col;
-                        tr.appendChild(td);
-                    });
-                    tbody.appendChild(tr);
-                });
+        dados.forEach((linha) => {
+          const cols = linha.c.map((c) => (c ? c.v : ''));
+          const tr = document.createElement('tr');
+          cols.forEach((col) => {
+            const td = document.createElement('td');
+            td.textContent = col;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
 
-                document.getElementById('erro').textContent = '';
-            } catch (e) {
-                document.getElementById('erro').textContent = 'Erro ao carregar dados: ' + e.message;
-                console.error(e);
-            }
+        document.getElementById('erro').textContent = '';
+      } catch (e) {
+        document.getElementById('erro').textContent = 'Erro ao carregar dados: ' + e.message;
+        console.error(e);
+      }
+    }
+
+    function filtrarTabela(inputId, tabelaId) {
+      const input = document.getElementById(inputId);
+      const filtro = input.value.toUpperCase();
+      const tabela = document.getElementById(tabelaId);
+      const trs = tabela.tBodies[0].getElementsByTagName('tr');
+
+      for (let i = 0; i < trs.length; i++) {
+        const tds = trs[i].getElementsByTagName('td');
+        let encontrado = false;
+
+        for (let j = 0; j < tds.length; j++) {
+          const txtValue = tds[j].textContent || tds[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filtro) > -1) {
+            encontrado = true;
+            break;
+          }
         }
+        trs[i].style.display = encontrado ? '' : 'none';
+      }
+    }
 
-        function filtrarTabela(inputId, tabelaId) {
-            const input = document.getElementById(inputId);
-            const filtro = input.value.toUpperCase();
-            const tabela = document.getElementById(tabelaId);
-            const trs = tabela.tBodies[0].getElementsByTagName('tr');
-
-            for (let i = 0; i < trs.length; i++) {
-                const tds = trs[i].getElementsByTagName('td');
-                let encontrado = false;
-
-                for (let j = 0; j < tds.length; j++) {
-                    const txtValue = tds[j].textContent || tds[j].innerText;
-                    if (txtValue.toUpperCase().indexOf(filtro) > -1) {
-                        encontrado = true;
-                        break;
-                    }
-                }
-                trs[i].style.display = encontrado ? '' : 'none';
-            }
-        }
-
-        window.onload = carregarTabela;
-    </script>
+    window.onload = carregarTabela;
+  </script>
 </body>
-
 </html>
