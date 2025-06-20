@@ -41,8 +41,8 @@
 <body>
     <h1>Peças para serem substituidas</h1>
 
-    <!-- Campo de pesquisa adicionado -->
-    <input type="text" id="filtroTabela" onkeyup="filtrarTabela()" placeholder="Pesquisar na tabela...">
+    <!-- Filtro 1 -->
+    <input type="text" id="filtroTabela1" onkeyup="filtrarTabela('filtroTabela1', 'tabelaPecas')" placeholder="Pesquisar na tabela...">
 
     <table id="tabelaPecas">
         <tr>
@@ -239,7 +239,11 @@
 </footer>
 
 <h1>Serviços para serem executados</h1>
-<table>
+
+<!-- Filtro 2 -->
+<input type="text" id="filtroTabela2" onkeyup="filtrarTabela('filtroTabela2', 'tabelaServicos')" placeholder="Pesquisar na tabela...">
+
+<table id="tabelaServicos">
     <tr>
         <th>Condominio</th>
         <th>Elevador</th>
@@ -263,7 +267,11 @@
 </footer>
 
 <h1>Informações para orçamentos</h1>
-<table>
+
+<!-- Filtro 3 -->
+<input type="text" id="filtroTabela3" onkeyup="filtrarTabela('filtroTabela3', 'tabelaOrcamentos')" placeholder="Pesquisar na tabela...">
+
+<table id="tabelaOrcamentos">
     <tr>
         <th>Condominio</th>
         <th>Elevador</th>
@@ -282,11 +290,11 @@
 </table>
 
 <script>
-    function filtrarTabela() {
+    function filtrarTabela(inputId, tabelaId) {
         var input, filtro, tabela, tr, td, i, j, txtValue, encontrado;
-        input = document.getElementById("filtroTabela");
+        input = document.getElementById(inputId);
         filtro = input.value.toUpperCase();
-        tabela = document.getElementById("tabelaPecas");
+        tabela = document.getElementById(tabelaId);
         tr = tabela.getElementsByTagName("tr");
 
         for (i = 1; i < tr.length; i++) { // Começa de 1 para ignorar o cabeçalho
