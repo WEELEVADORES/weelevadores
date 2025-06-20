@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="30"> <!-- Atualiza a cada 30 segundos -->
@@ -14,29 +13,23 @@
             margin: 0;
             padding: 20px;
         }
-
         table {
             margin: 20px auto;
             border-collapse: collapse;
             width: 80%;
         }
-
-        th,
-        td {
+        th, td {
             border: 1px solid #333;
             padding: 15px;
             font-size: 24px;
         }
-
         th {
             background-color: #4CAF50;
             color: white;
         }
-
         td {
             background-color: white;
         }
-
         input {
             padding: 10px;
             font-size: 18px;
@@ -45,10 +38,10 @@
         }
     </style>
 </head>
-
 <body>
-    <h1>Peças para serem substituídas</h1>
+    <h1>Peças para serem substituidas</h1>
 
+    <!-- Campo de pesquisa adicionado -->
     <input type="text" id="filtroTabela" onkeyup="filtrarTabela()" placeholder="Pesquisar na tabela...">
 
     <table id="tabelaPecas">
@@ -59,111 +52,264 @@
             <th>Quantidade</th>
             <th>Status</th>
         </tr>
-        <!-- Linhas da tabela -->
         <tr>
             <td>Sales</td>
-            <td>Led para botão</td>
+            <td>Led para botão</td>            
             <td>Unico</td>
             <td>01</td>
-            <td>Separado</td>
+            <td>Separado</td>  
         </tr>
         <tr>
             <td>Matos de Carvalho</td>
             <td>Corrediças miconic</td>
             <td>Social</td>
             <td>04</td>
-            <td>Separado</td>
+            <td>Separado</td>  
         </tr>
         <tr>
             <td>Matos de Carvalho</td>
             <td>Corrediça gravatinha</td>
             <td>Social</td>
             <td>04</td>
-            <td>Separado</td>
+            <td>Separado</td>  
         </tr>
         <tr>
             <td>Matos de Carvalho</td>
             <td>Painel de chamada MX</td>
             <td>Serviço</td>
             <td>01</td>
+            <td>Separado</td>  
+        </tr>
+        <tr>
+            <td>Atlântico Sul</td>
+            <td>Óleo lubrificante N°33</td>
+            <td>Social e Serviço</td>
+            <td>21</td>
+            <td>Aguardando separação</td>
+        </tr>
+        <tr>
+            <td>Atlântico Sul</td>
+            <td>Corrediças Tke</td>
+            <td>Social e Serviço</td>
+            <td>08</td>
             <td>Separado</td>
         </tr>
-        <!-- Adicione o restante das linhas aqui -->
-    </table>
-
-    <!-- Outras tabelas continuam abaixo -->
-    <!-- Exemplo de segunda tabela -->
-    <h1>Serviços para serem executados</h1>
-    <table>
         <tr>
-            <th>Condominio</th>
-            <th>Elevador</th>
-            <th>Descrição</th>
-            <th>Status</th>
+            <td>Atlântico Sul</td>
+            <td>Roldana de trinco</td>
+            <td>Social </td>
+            <td>02</td>
+            <td>Separado</td>
         </tr>
         <tr>
-            <td>Ilhas Gregas</td>
-            <td>Social e serviço Andrus</td>
-            <td>Encurtamento cabos de tração</td>
-            <td>Aguardando agendamento</td>
+            <td>Atlântico Sul</td>
+            <td>Acrilico para termostato</td>
+            <td>Serviço</td>
+            <td>01</td>
+            <td>Separado</td>
         </tr>
         <tr>
-            <td>Antilhas</td>
-            <td>Bloco B</td>
-            <td>Amortecedor 03 andar</td>
-            <td>Aguardando reposição</td>
-        </tr>
-    </table>
-
-    <!-- Exemplo de terceira tabela -->
-    <h1>Informações para orçamentos</h1>
-    <table>
-        <tr>
-            <th>Condominio</th>
-            <th>Elevador</th>
-            <th>Descrição</th>
+            <td>Atlântico Sul</td>
+            <td>Mola de porta</td>
+            <td>Serviço</td>
+            <td>01</td>
+            <td>Separado</td>
         </tr>
         <tr>
-            <td>Marechal Rondon</td>
-            <td>Único</td>
-            <td>Medidas cabos de tração e polia</td>
-        </tr>
-        <tr>
-            <td>Gran Place</td>
+            <td>Atlântico Sul</td>
+            <td>Contato AZ061</td>
             <td>Social 01</td>
-            <td>Medidas cabos de tração e polia</td>
+            <td>01</td>
+            <td>Aguardando separação</td>
+        </tr>
+        <tr>
+            <td>Santorini</td>
+            <td>Fecho AK1</td>
+            <td>Unico</td>
+            <td>01</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>Roldana Selcom</td>
+            <td>Social 03</td>
+            <td>04</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>Subteto </td>
+            <td>Elevador 05 e 06</td>
+            <td>02</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>Polia tensora do operador de porta </td>
+            <td>Elevador 01</td>
+            <td>01</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>Cabos de tração e polia </td>
+            <td>Elevador 02</td>
+            <td>01</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>Cabo de tração de porta de cabine </td>
+            <td>Elevador 02</td>
+            <td>01</td>
+            <td>Aguardando separação</td>
+        </tr>
+        <tr>
+            <td>Cidade</td>
+            <td>Subteto </td>
+            <td>Elevador 05 e 06</td>
+            <td>02</td>
+            <td>Aguardando separação</td>
+        </tr>
+        <tr>
+            <td>Luzerne</td>
+            <td>Contato carvão</td>
+            <td>Social</td>
+            <td>08</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Duarte</td>
+            <td>Garfo de porta</td>
+            <td>Social 02</td>
+            <td>02</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Riquet</td>
+            <td>Botão Classe A</td>
+            <td>Serviço</td>
+            <td>02</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Riquet</td>
+            <td>Lente botão Classe A</td>
+            <td>Social</td>
+            <td>04</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Rolim Veras</td>
+            <td>Óleo lubrificante N° 33</td>
+            <td>Bloco A e B</td>
+            <td>07</td>
+            <td>Aguardando separação</td>
+        </tr>
+        <tr>
+            <td>Reserva Imperial</td>
+            <td>Cabo de Manobra</td>
+            <td>Serviço Bloco B</td>
+            <td>108</td>
+            <td>Separado</td>
+        </tr>
+        <tr>
+            <td>Viscaya Gardens</td>
+            <td>Cabo de tração de porta de cabine</td>
+            <td>Social e Serviço</td>
+            <td>02</td>
+            <td>Aguardando separação</td>
+        </tr>
+        <tr>
+            <td>Viscaya Gardens</td>
+            <td>Cabo de tração de porta de Pavimento</td>
+            <td>Social e Serviço</td>
+            <td>02</td>
+            <td>Aguardando separação</td>
+        </tr>
+        <tr>
+            <td>Itagua</td>
+            <td>Indicadores dos andares P e SF</td>
+            <td>Social</td>
+            <td>02</td>
+            <td>Separado</td>
         </tr>
     </table>
 
-    <script>
-        function filtrarTabela() {
-            var input, filtro, tabela, tr, td, i, j, txtValue, encontrado;
-            input = document.getElementById("filtroTabela");
-            filtro = input.value.toUpperCase();
-            tabela = document.getElementById("tabelaPecas");
-            tr = tabela.getElementsByTagName("tr");
+</footer>
 
-            for (i = 1; i < tr.length; i++) { // Começa de 1 para ignorar o cabeçalho
-                tr[i].style.display = "none"; // Esconde a linha inicialmente
-                td = tr[i].getElementsByTagName("td");
-                encontrado = false;
+<h1>Serviços para serem executados</h1>
+<table>
+    <tr>
+        <th>Condominio</th>
+        <th>Elevador</th>
+        <th>Descrição</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td>Ilhas Gregas</td>
+        <td>Social e serviço Andrus</td>
+        <td>Encurtamento cabos de tração</td>
+        <td>Aguardando agendamento</td>
+    </tr>
+    <tr>
+        <td>Antilhas</td>
+        <td>Bloco B</td>
+        <td>Amortecedor 03 andar</td>
+        <td>Aguardando reposição</td>
+    </tr>
+</table>
 
-                for (j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filtro) > -1) {
-                            encontrado = true;
-                            break;
-                        }
+</footer>
+
+<h1>Informações para orçamentos</h1>
+<table>
+    <tr>
+        <th>Condominio</th>
+        <th>Elevador</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>Marechal Rondon</td>
+        <td>Único</td>
+        <td>Medidas cabos de tração e polia</td>
+    </tr>
+    <tr>
+        <td>Gran Place</td>
+        <td>Social 01</td>
+        <td>Medidas cabos de tração e polia</td>
+    </tr>
+</table>
+
+<script>
+    function filtrarTabela() {
+        var input, filtro, tabela, tr, td, i, j, txtValue, encontrado;
+        input = document.getElementById("filtroTabela");
+        filtro = input.value.toUpperCase();
+        tabela = document.getElementById("tabelaPecas");
+        tr = tabela.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) { // Começa de 1 para ignorar o cabeçalho
+            tr[i].style.display = "none"; // Esconde a linha inicialmente
+            td = tr[i].getElementsByTagName("td");
+            encontrado = false;
+
+            for (j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filtro) > -1) {
+                        encontrado = true;
+                        break;
                     }
                 }
+            }
 
-                if (encontrado) {
-                    tr[i].style.display = "";
-                }
+            if (encontrado) {
+                tr[i].style.display = "";
             }
         }
-    </script>
-</body>
+    }
+</script>
 
+</body>
 </html>
