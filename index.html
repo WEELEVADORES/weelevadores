@@ -89,7 +89,7 @@
                     const json = JSON.parse(data.substr(47).slice(0, -2));
                     const tabela = document.getElementById(tabelaId);
 
-                    json.table.rows.forEach(row => {
+                    json.table.rows.slice(1).forEach(row => {
                         const tr = document.createElement('tr');
                         row.c.forEach((cell, index) => {
                             if (index < colunas.length) {
